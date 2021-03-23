@@ -1,1 +1,6 @@
+# Tarantool rocks
 */.rocks
+
+# Tarantool snaps and xlogs
+*.snap
+*.xlog
