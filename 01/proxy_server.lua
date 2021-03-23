@@ -25,9 +25,7 @@ local function proxy_handler(req)
     end
     local headers = req:headers()
     headers.host = config.proxy.bypass.host
-    print(method, proxy_url_full, body, headers.host)
     local resp = client:request(method, proxy_url_full, body, {headers = headers, timeout = 1, follow_location = true})
-    print(resp.reason, resp.status, resp.body)
     return {
         status = resp.status,
         headers = resp.headers,

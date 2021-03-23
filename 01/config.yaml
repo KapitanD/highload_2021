@@ -2,5 +2,5 @@
 proxy:
   port: 10000
   bypass:
-    host: ya.ru
-    port: 80
+    host: localhost
+    port: 9000
