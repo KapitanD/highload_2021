@@ -6,6 +6,7 @@ local http_router = require('http.router')
 local fio = require('fio')
 local yaml = require('yaml')
 local log = require('log')
+local clock = require('clock')
 
 local config = {}
 local connections = {}
