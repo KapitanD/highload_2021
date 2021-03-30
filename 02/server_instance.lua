@@ -1,7 +1,5 @@
 #!/usr/bin/env tarantool
 
-local http_server = require('http.server')
-local http_router = require('http.router')
 local clock = require('clock')
 local fio = require('fio')
 
