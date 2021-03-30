@@ -16,9 +16,10 @@ tarantool> load_balancer = require('load_balancer')
 ```
 Можно затем уронить пару серверов, потом поднять их, все должно работать.
 Пример конфига:
-```
+```yaml
 ---
 load_balancer:
+  max_req_per_sec: 1000
   host: localhost
   port: 8080
   hosts:
