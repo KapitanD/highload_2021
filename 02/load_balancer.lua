@@ -12,6 +12,7 @@ local connections = {}
 local conn_hosts = {}
 local active_connections = 0
 local req_num = 1
+local requests_times = {}
 
 local function on_connect(conn)
     log.info('Connected to %s succesful!', conn.host_s)
@@ -54,6 +55,18 @@ end
 
 
 local function handler()
+    local current_time = clock.monotonic64()
+    table.insert(requests_times, current_time)
+    while #requests_times ~= 0 and current_time - requests_times[1] > 1e9 do
+        table.remove(requests_times, 1)
+    end 
+
+    if #requests_times > config.load_balancer.max_req_per_sec then
+        return {
+            body = 'error: too many requests',
+            status = 429,
+        }
+    end
     if active_connections == 0 then
         return {
             body = 'error: all servers is down',
