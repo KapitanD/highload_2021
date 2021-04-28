@@ -1,6 +1,7 @@
 local yaml = require('yaml')
 local http_client = require('http.client')
 local fio = require('fio')
+local uri = require('uri')
 
 local fh, err = fio.open('config.yaml')
 if err ~= nil then
@@ -9,23 +10,52 @@ if err ~= nil then
 end
 
 local client = http_client.new()
-local config = yaml.decode(fh:read())
-local proxy_url = config.proxy.bypass.host .. ':' .. config.proxy.bypass.port
 
+local raw_data, err = fh:read()
+if err ~= nil then
+    print("Can't read file")
+    return 1
+end
+
+local config= yaml.decode(raw_data)
 
 local function proxy_handler(req)
     local method = req:method()
-    local proxy_url_full = 'http://'..proxy_url..req:path()
-    if req:query() ~= '' then
-        proxy_url_full = proxy_url_full..'?'..req:query()
+
+    local scheme = ''
+    if config.proxy.bypass.port == 80 then
+        scheme = 'http'
+    elseif config.proxy.bypass.port == 443 then
+        scheme = 'https'
+    else
+        scheme = 'http'
     end
+    
+    local proxy_url_full = uri.format({
+        host=config.proxy.bypass.host,
+        service=tostring(config.proxy.bypass.port),
+        path=req:path(),
+        scheme = 'http',
+    })
+    print(proxy_url_full)
+
     local body = req:read()
     if body == '' then
         body = nil
     end
+
     local headers = req:headers()
     headers.host = config.proxy.bypass.host
+
     local resp = client:request(method, proxy_url_full, body, {headers = headers, timeout = 1, follow_location = true})
+
+    print(resp.status)
+    print(resp.body)
+    if resp.headers ~= nil then
+        for key, val in pairs(resp.headers) do
+            print(key, val)
+        end
+    end
     return {
         status = resp.status,
         headers = resp.headers,

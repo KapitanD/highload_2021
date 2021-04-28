@@ -4,3 +4,6 @@
 # Tarantool snaps and xlogs
 *.snap
 *.xlog
+
+# Tarantool instances data
+*/data
