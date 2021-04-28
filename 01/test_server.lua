@@ -1,4 +1,15 @@
 -- Simle server
+local fio = require('fio')
+
+local work_dir = fio.pathjoin('data', 'test_server')
+fio.mktree(work_dir)
+
+box.cfg({
+    log='test_server.log',
+    pid_file='test_server.pid',
+    work_dir=work_dir,
+})
+
 local function hello()
     return {
         status = 200,

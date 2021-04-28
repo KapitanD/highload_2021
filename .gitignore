@@ -8,3 +8,7 @@
 
 # Tarantool instances data
 */data
+
+# Log and pid files
+*.log
+*.pid

@@ -2,6 +2,18 @@ local yaml = require('yaml')
 local http_client = require('http.client')
 local fio = require('fio')
 local uri = require('uri')
+local fio = require('fio')
+
+local work_dir = fio.pathjoin('data', 'proxy_server')
+fio.mktree(work_dir)
+
+box.cfg({
+    log='proxy_server.log',
+    pid_file='proxy_server.pid',
+    work_dir=work_dir
+})
+
+
 
 local fh, err = fio.open('config.yaml')
 if err ~= nil then
@@ -30,7 +42,7 @@ local function proxy_handler(req)
     else
         scheme = 'http'
     end
-    
+
     local proxy_url_full = uri.format({
         host=config.proxy.bypass.host,
         service=tostring(config.proxy.bypass.port),
