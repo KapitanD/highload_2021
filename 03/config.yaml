@@ -1,0 +1,18 @@
+---
+instances:
+  - uuid: '571147c7-7564-4f70-a7dc-87cd295fcfeb'
+    port: 10021
+    admin_port: 8081
+    host: localhost
+  - uuid: 'f3485f63-3e95-45d3-8a45-4d093a38d603'
+    port: 10022
+    admin_port: 8082
+    host: localhost
+  - uuid: '2c5781b8-21cf-4a46-96f0-ad4d520fcae5'
+    port: 10023
+    admin_port: 8083
+    host: localhost
+  - uuid: '9c99ae09-367a-4a64-a898-3c61c73f123d'
+    port: 10024
+    admin_port: 8084
+    host: localhost
