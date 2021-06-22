@@ -1,0 +1,22 @@
+---
+load_balancer:
+  max_req_per_sec: 1000
+  host: localhost
+  port: 8080
+  hosts:
+    - host: localhost
+      port: 8081
+      user: admin
+      password: admin
+    - host: localhost
+      port: 8082
+      user: admin
+      password: admin
+    - host: localhost
+      port: 8083
+      user: admin
+      password: admin
+    - host: localhost
+      port: 8084
+      user: admin
+      password: admin
