@@ -1,2 +1,13 @@
+# Tarantool rocks
 */.rocks
+
+# Tarantool snaps and xlogs
+*.snap
+*.xlog
+
+# Tarantool instances data
 */data
+
+# Log and pid files
+*.log
+*.pid
