@@ -1,0 +1,6 @@
+---
+proxy:
+  port: 10000
+  bypass:
+    host: localhost
+    port: 9000
